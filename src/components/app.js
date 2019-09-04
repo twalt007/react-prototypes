@@ -1,8 +1,30 @@
 import React from "react"
+import Table from './table'
 
-export default (props) => {
+const students = [
+    {
+        name: 'Dr. Jeckyl',
+        course: 'Chemistry',
+        grade: '76'
+    },
+    {
+        name: 'Mr. Hyde',
+        course: 'Forensics',
+        grade: '89'
+    },
+    {
+        name: 'Prudence Blackbird',
+        course: 'Music',
+        grade: '99'
+    }
+];
+
+export default () => {
     return (
-        <h1>My first React functional component</h1>
+        <div className="container">
+            <h1>Student Grade Table</h1>
+            <Table data={students}/>
+        </div>
     )
 }
 
