@@ -6,9 +6,3 @@
 
 > For setup instructions visit <a href="http://reactprototypes.com/prototypes/react-intro">reactPrototypes.com/prototypes/react-intro</a>, this is the first prototype and where all new comers should start!
 >
-
-### Bundle For Deployment
-
-> - This repo is not intended for any kind of deployment and is not properly configured for production use
-> - This repo is for learning purposes only
->
