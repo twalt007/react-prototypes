@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Field from './field';
 
 class ContactForm extends Component{
     constructor(props){
@@ -7,40 +8,52 @@ class ContactForm extends Component{
         this.state={
             form:{
                 firstName:'',
-                lastName:''
+                lastName:'',
+                phone:'',
+                email:''
             }
             
         }
         this.handleInputChange=this.handleInputChange.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
+        this.reset=this.reset.bind(this);
     }
     handleInputChange(event){
-        console.log(event.target.value);
-        console.log(event.target.name);
         const {value,name} = event.target;
         const {form} = this.state;
 
         form[name]=value;
 
-        this.setState({
+        this.setState({//state isnt updated until we use setState to update
             form: {...form}
         });
     }
+    handleSubmit(e){
+        e.preventDefault();
+        console.log("handle submit called",this.state.form)
+        this.props.add(this.state.form);
+        this.reset();
+    }
+    reset(){
+        this.setState({
+            form:{
+                firstName:'',
+                lastName:'',
+                phone:'',
+                email:''
+            }
+        })
+    }
     render(){
-        const {firstName, lastName}=this.state.form;
+        const {firstName, lastName, phone, email}=this.state.form;
         return(
-            <form>
-                <div className="form-group">
-                    <label>First Name</label>
-                    <input className="form-control" onChange={this.handleInputChange} name="firstName" value={firstName} type="text"></input>
-                </div>
-                <div className="form-group">
-                    <label>Last Name</label>
-                    <input className="form-control" onChange={this.handleInputChange} name="lastName" value={lastName} type="text"></input>
-                </div>
-                <div className="form-group">
-                    <label>First Name</label>
-                    <input className="form-control" name="firstName" type="text"></input>
-                </div>
+            <form onSubmit={this.handleSubmit}>
+                <Field name="firstName" label="First Name" type="text" value={firstName} onChange={this.handleInputChange}/>
+                <Field name="lastName" label="Last Name" type="text" value={lastName} onChange={this.handleInputChange}/>
+                <Field name="phone" label="Phone" type="tel" value={phone} onChange={this.handleInputChange}/>
+                <Field name="email" label="Email" type="email" value={email} onChange={this.handleInputChange}/>
+                <button>Add Contact</button>
+                <button type="button" onClick={this.reset}>Clear Form</button>
             </form>
         )
     }
